@@ -1,7 +1,7 @@
 # Stripe API Postman Collection
 
 Ova kolekcija sadrži primjere zahtjeva za testiranje **Stripe API-ja** u sandbox okruženju.  
-Možete koristiti kolekciju da vježbate kreiranje plaćanja, refundiranje i testiranje idempotency logike.
+Možete koristiti kolekciju da vježbate plaćanje, refundiranje i testiranje idempotency logike.
 
 ## 🚀 Setup
 
