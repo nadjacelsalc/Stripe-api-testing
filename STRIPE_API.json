@@ -1,0 +1,455 @@
+{
+  "info": {
+    "_postman_id": "51cb1460-3e88-43dd-a919-192d86306767",
+    "name": "STRIPE API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48364776",
+    "_collection_link": "https://nadja-celsalc-4878486.postman.co/workspace/Nadja-Celik---Salcinovic's-Work~033da704-bd29-4ef9-8c7d-10b6cb89dd18/collection/48364776-51cb1460-3e88-43dd-a919-192d86306767?action=share&source=collection_link&creator=48364776"
+  },
+  "item": [
+    {
+      "name": "KreirajPlacanjeSuccessful",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "amount",
+              "value": "200",
+              "type": "text"
+            },
+            {
+              "key": "currency",
+              "value": "usd",
+              "type": "text"
+            },
+            {
+              "key": "payment_method_types[]",
+              "value": "card",
+              "type": "text"
+            },
+            {
+              "key": "payment_method",
+              "value": "pm_card_visa",
+              "type": "text"
+            },
+            {
+              "key": "confirm",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/payment_intents",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "KreirajPlacanjeUnsuccessful",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 - amount to large\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "amount",
+              "value": "5000000000000000",
+              "type": "text"
+            },
+            {
+              "key": "currency",
+              "value": "usd",
+              "type": "text"
+            },
+            {
+              "key": "payment_method_types[]",
+              "value": "card",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/payment_intents",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RefundirajPlacanje",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "payment_intent",
+              "value": "pi_3S6sPyRui6YT0wnC11GcvlhV",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/refunds",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "refunds"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RefundirajDuploUnsuccessful",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400 - bad request\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "payment_intent",
+              "value": "pi_3S6sPyRui6YT0wnC11GcvlhV",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/refunds",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "refunds"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Neautorizovan zahtjev",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 401 - unauthorised request\", function () {\r",
+              "    pm.response.to.have.status(401);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer jkhefwehkw",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "amount",
+              "value": "675",
+              "type": "text"
+            },
+            {
+              "key": "currency",
+              "value": "usd",
+              "type": "text"
+            },
+            {
+              "key": "payment_method_types[]",
+              "value": "card",
+              "type": "text"
+            },
+            {
+              "key": "payment_method",
+              "value": "pm_card_visa",
+              "type": "text"
+            },
+            {
+              "key": "confirm",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/payment_intents",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PlacanjeSaIdempotencyKeySuccessful",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "unique_key_12345",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "amount",
+              "value": "700",
+              "type": "text"
+            },
+            {
+              "key": "currency",
+              "value": "usd",
+              "type": "text"
+            },
+            {
+              "key": "payment_method_types[]",
+              "value": "card",
+              "type": "text"
+            },
+            {
+              "key": "payment_method",
+              "value": "pm_card_visa",
+              "type": "text"
+            },
+            {
+              "key": "confirm",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/payment_intents",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PlacanjeSaIdempotencyKeyUnsuccessful",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Should return 400 when params change with same Idempotency-Key\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{STRIPE_SECRET_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "unique_key_12345",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "amount",
+              "value": "700",
+              "type": "text"
+            },
+            {
+              "key": "currency",
+              "value": "usd",
+              "type": "text"
+            },
+            {
+              "key": "payment_method_types[]",
+              "value": "card",
+              "type": "text"
+            },
+            {
+              "key": "payment_method",
+              "value": "pm_card_visa",
+              "type": "text"
+            },
+            {
+              "key": "confirm",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/payment_intents",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "payment_intents"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
