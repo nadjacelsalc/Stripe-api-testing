@@ -28,7 +28,3 @@ Možete koristiti kolekciju da vježbate plaćanje, refundiranje i testiranje id
 
 - **Nikada ne objavljujte svoj stvarni secret key** (`sk_live_...`) u javnim repozitorijima.  
 - Ova kolekcija koristi placeholder `{{STRIPE_SECRET_KEY}}` → korisnici moraju sami unijeti svoj ključ.  
-- Više o Stripe test karticama: [Stripe Docs](https://stripe.com/docs/testing)
-
-- Autorizacija i autentikacija
-- Idempotency i zaštita od duplih zahtjeva
